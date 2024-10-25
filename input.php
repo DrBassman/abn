@@ -20,22 +20,29 @@
                 </div>
             </div>
             <form data-abide novalidate action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
-                <div class="grid-x">
+                <div class="grid-x align-center">
                     <div class="cell">
                         <div data-abide-error class="alert callout" style="display: none;">
                             <p><i class="fi-alert"></i> There are some errors...</p>
                         </div>
                     </div>
                     <div class="cell small-3">
-                        <label for="whichform">Medicare or Medicaid?</label>
+                        <label for="whichform">Medicare or Medicaid form?</label>
                         <select id="whichform" name="whichform">
                             <option value="medicaid">Medicaid</option>
                             <option value="medicare">Medicare</option>
                         </select>
                     </div>
+                    <div class="cell small-6"></div>
+                    <div class="cell"></div>
                     <div class="cell small-3">
                         <label for="ptname">B. Patient Name</label>
                         <input type="text" id="ptname" name="ptname" placeholder="Last, First M" aria-describedby="ptName" required>
+                        <span class="form-error">Patient Name is required.</span>
+                    </div>
+                    <div class="cell small-3">
+                        <label for="ptname">B. Patient Date of Birth</label>
+                        <input type="date" id="ptdob" name="ptdob" placeholder="Date of Birth" aria-describedby="ptDOB" required>
                         <span class="form-error">Patient Name is required.</span>
                     </div>
                     <div class="cell small-3">
@@ -118,22 +125,23 @@
                     <div class="cell"></div>
 
                     <div class="class small-3">
-                        <input type="text" id="d7" name="d7" maxlength="32" placeholder="CPT/HCPCS Description" readonly>
+                        <input type="text" id="d7" name="d7" maxlength="32" placeholder="CPT/HCPCS Description" readonly value="Total:">
                     </div>
                     <div class="class small-3">
-                        <input type="text" id="e7" name="e7" maxlength="32" readonly value="Total:">
+                        <input type="text" id="e7" name="e7" maxlength="32" readonly>
                     </div>
                     <div class="class small-3">
                         <input type="number" id="f7" name="f7" maxlength="32" readonly value="0.00">
                     </div>
                     <div class="cell"></div>
 
-                    <div class="cell small-7"></div>
+                    <div class="cell small-5"></div>
                         <div class="button-group hollow">
                             <button class="button secondary" type="reset" value="Reset">Reset</button>
                             <input type="submit" class="button primary" value="Create Form">
                         </div>
                     </div>
+                    <div class="cell"></div>
                 </div>
             </form>
         </div>
@@ -153,7 +161,23 @@
             var f7 = document.getElementById("f7");
             function updateTotal() {
                 tot = Number(f1.value) + Number(f2.value) + Number(f3.value) + Number(f4.value) + Number(f5.value) + Number(f6.value);
-                f7.value = tot;
+                f7.value = tot.toLocaleString(undefined, { minimumFractionDigits: 2});
+                f1.value = Number(f1.value).toLocaleString(undefined, { minimumFractionDigits: 2});
+                if (f2.value != "") {
+                    f2.value = Number(f2.value).toLocaleString(undefined, { minimumFractionDigits: 2});
+                }
+                if (f3.value != "") {
+                    f3.value = Number(f3.value).toLocaleString(undefined, { minimumFractionDigits: 2});
+                }
+                if (f4.value != "") {
+                    f4.value = Number(f4.value).toLocaleString(undefined, { minimumFractionDigits: 2});
+                }
+                if (f5.value != "") {
+                    f5.value = Number(f5.value).toLocaleString(undefined, { minimumFractionDigits: 2});
+                }
+                if (f6.value != "") {
+                    f6.value = Number(f6.value).toLocaleString(undefined, { minimumFractionDigits: 2});
+                }
             }
         </script>
     </body>

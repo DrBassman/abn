@@ -2,42 +2,43 @@
     // Get inputs from form...
     $whichform = $_POST["whichform"];
     $ptname = $_POST["ptname"];
+    $ptdob = date("m/d/Y", strtotime($_POST["ptdob"]));
     $ptid = $_POST["ptid"];
     $d1 = $_POST["d1"];
     $e1 = $_POST["e1"];
-    $f1 = number_format((float)$_POST["f1"], 2, ".", "");
+    $f1 = '$' . number_format((float)$_POST["f1"], 2, ".", "");
 
     $d2 = $_POST["d2"];
     $e2 = $_POST["e2"];
     $f2 = $_POST["f2"];
     if ($f2 != "") {
-        $f2 = number_format((float)$_POST["f2"], 2, ".", "");
+        $f2 = '$' . number_format((float)$_POST["f2"], 2, ".", "");
     }
     $d3 = $_POST["d3"];
     $e3 = $_POST["e3"];
     $f3 = $_POST["f3"];
     if ($f3 != "") {
-        $f3 = number_format((float)$_POST["f3"], 2, ".", "");
+        $f3 = '$' . number_format((float)$_POST["f3"], 2, ".", "");
     }
     $d4 = $_POST["d4"];
     $e4 = $_POST["e4"];
     $f4 = $_POST["f4"];
     if ($f4 != "" ) {
-        $f4 = number_format((float)$_POST["f4"], 2, ".", "");
+        $f4 = '$' . number_format((float)$_POST["f4"], 2, ".", "");
     }
     $d5 = $_POST["d5"];
     $e5 = $_POST["e5"];
     $f5 = $_POST["f5"];
     if ($f5 != "") {
-        $f5 = number_format((float)$_POST["f5"], 2, ".", "");
+        $f5 = '$' . number_format((float)$_POST["f5"], 2, ".", "");
     }
     $d6 = $_POST["d6"];
     $e6 = $_POST["e6"];
     $f6 = $_POST["f6"];
     if ($f6 != "") {
-        $f6 = number_format((float)$_POST["f6"], 2, ".", "");
+        $f6 = '$' . number_format((float)$_POST["f6"], 2, ".", "");
     }
-    $f7 = number_format((float)$_POST["f7"], 2, ".", "");
+    $f7 = '$' . number_format((float)$_POST["f7"], 2, ".", "");
 
     date_default_timezone_set('America/Chicago');
     $form_date = date('m/d/Y', time());
@@ -61,19 +62,19 @@
         $pdf->useImportedPage($tplIdx);
 
         $pdf->AddFont("pdfacourier", "B");
-        $pdf->SetFont("pdfacourier", "B", 12);
+        $pdf->SetFont("pdfacourier", "B", 10);
         // Info at top of form
-        $pdf->setXY(50, 8.25);
+        $pdf->setXY(50, 9.5);
         $pdf->Write(0, 'Losh Optometry LLC');
         $pdf->Ln();
         $pdf->setX(50);
-        $pdf->Write(0, $ptname);
-        $pdf->setX(157.5);
+        $pdf->Write(0, $ptname . ' ' . $ptdob);
+        $pdf->setX(165);
         $pdf->Write(0, $ptid);
         // Table data...
         $txtd = "$d1\n$d2\n$d3\n$d4\n$d5\n$d6\nTotal:";
         $txte = "$e1\n$e2\n$e3\n$e4\n$e5\n$e6\n";
-        $txtf = "$f1\n$f2\n$f3\n$f4\n$f5\n$f6\n$$f7";
+        $txtf = "$f1\n$f2\n$f3\n$f4\n$f5\n$f6\n$f7";
         $pdf->SetFont("pdfacourier", "B", 10);
         $pdf->SetFillColor(255, 255, 127);
         $pdf->MultiCell(75, 34, $txtd, 0, '', false, 1, 17.5, 66);
@@ -81,7 +82,6 @@
         $pdf->MultiCell(33, 34, $txtf, 0, 'R', false, 1, 168.5, 66);
         $pdf->SetFont("pdfacourier", "B", 12);
         $pdf->MultiCell(59.25, 0, $form_date, 0, '', false, 1, 130, 225);
-
     }
     ob_end_clean();
     $pdf->Output(__DIR__ . '/' . $file_name, 'I');
