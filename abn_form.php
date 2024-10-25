@@ -61,8 +61,8 @@
         $pdf->AddPage($size['orientation'], $size);
         $pdf->useImportedPage($tplIdx);
 
-        $pdf->AddFont("pdfacourier", "B");
-        $pdf->SetFont("pdfacourier", "B", 10);
+        $pdf->AddFont("comicmono", "B");
+        $pdf->SetFont("comicmono", "B", 10);
         // Info at top of form
         $pdf->setXY(50, 9.5);
         $pdf->Write(0, 'Losh Optometry LLC');
@@ -75,12 +75,12 @@
         $txtd = "$d1\n$d2\n$d3\n$d4\n$d5\n$d6\nTotal:";
         $txte = "$e1\n$e2\n$e3\n$e4\n$e5\n$e6\n";
         $txtf = "$f1\n$f2\n$f3\n$f4\n$f5\n$f6\n$f7";
-        $pdf->SetFont("pdfacourier", "B", 10);
+        $pdf->SetFont("comicmono", "B", 10);
         $pdf->SetFillColor(255, 255, 127);
         $pdf->MultiCell(75, 34, $txtd, 0, '', false, 1, 17.5, 66);
         $pdf->MultiCell(75, 34, $txte, 0, '', false, 1, 93, 66);
         $pdf->MultiCell(33, 34, $txtf, 0, 'R', false, 1, 168.5, 66);
-        $pdf->SetFont("pdfacourier", "B", 12);
+        $pdf->SetFont("comicmono", "B", 12);
         $pdf->MultiCell(59.25, 0, $form_date, 0, '', false, 1, 130, 225);
     }
     ob_end_clean();
